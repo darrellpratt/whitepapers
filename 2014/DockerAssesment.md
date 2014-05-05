@@ -22,7 +22,13 @@ Docker manages to scale in the sense of maintaining many images of different app
 
 What does this mean? For example, imagine a large Java Application which is maintained in git with a build process hosted within Jenkins.  The build process could easily take a given base Dockerfile and load a different codebase into that container, instantiate it, run a full test suite and then decommission that container. The build could do this is a completely automated fashion. These containers can also run in parallel on a host or host sharing the unchanged components between each container. This allows for scaling the number of containers with very little disk space or resources being used.  With a traditional VM infrastructure, this would require unique guest host images, which are several gigabytes in size each and take time to build and startup.  Docker makes this trivial and extremely fast.
 
-The Docker name itself comes from the idea of shipping.  As the company explains it, shipping used to be done in a [break bulk fashion](wikiBreakBulkLink) .
+The Docker name itself comes from the idea of shipping.  As the company explains it, shipping used to be done in a [break bulk fashion][wikiBreakBulkLink]. Simply put, cargo was shipped as it came, without any standardized boxing.  Shipping companies needed to worry about interactions between any items that might be onboard a ship at any time. This was revolutionized after 1960 as shipping containers were introduced.  These containers are common sight now, but this one change allowed for effeciencies in loading and unloading of cargo, and relay of those items through the other transit systems. This analogy holds true to what Docker is attempting with system virtualization as well. Docker generally attempts to alleviate the concerns over what might be contained within. This containment solves many problems with library and [dependency hell][wikiDepHellLink] that are typically seen with standard virtualization and certainly bare metal deployments. This allows any application and its various dependencies to be packaged up as a lightweight container that can be deployed virtually anywhere.
+
+
+
+
+
+
 
 ## Configuration
 
@@ -48,5 +54,6 @@ The Docker name itself comes from the idea of shipping.  As the company explains
 
 
 [dockervm1]: https://raw.githubusercontent.com/darrellpratt/whitepapers/master/2014/images/docker_vm.jpg
-[wikiBreakBulkLink] : http://en.wikipedia.org/wiki/Break_bulk_cargo
+[wikiBreakBulkLink]: http://en.wikipedia.org/wiki/Break_bulk_cargo
+[wikiDepHellLink]: http://en.wikipedia.org/wiki/Dependency_hell
 

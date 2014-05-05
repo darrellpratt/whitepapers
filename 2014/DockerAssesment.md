@@ -10,5 +10,33 @@ Virtual machines have always been a large part of any sizeable development organ
 
 ## Problem Statement
 
-Virtualization has helped companies make the best use of their physical hardware within data centers.  Primarily, this has been the realm of VMWare and few other built in solutions within various operating systems. Although some groups have built quite a bit of tooling around VMWare and the provisioning of images to users, there is still quite a bit of setup involved with this approach and no true method for the developer to declare which resources are needed for the image and how to separate those images based upon the application's needs. At the completion of provisioning, one still has a VM that looks like a physical machine that might be running various application servers or databases. There is no true separation of concerns with this approach.  
+Virtualization has helped companies make the best use of their physical hardware within data centers.  Primarily, this has been the realm of VMWare and few other built in solutions within various operating systems. Although some groups have built quite a bit of tooling around VMWare and the provisioning of images to users, there is still quite a bit of setup involved with this approach and no true method for the developer to declare which resources are needed for the image and how to separate those images based upon the application's needs. At the completion of provisioning, one still has a VM that looks like a physical machine that might be running various application servers or databases. There is no true separation of concerns with this approach. 
+
+## Docker Background
+
+Docker was created to solve the issue of build once, run anywhere. Docker automates the creation of a self-sufficient container that can run anywhere, but displays the same outward behaviour to the developer or ops team regardless of location. A central difference between Docker and traditional virtual machines, is that the Docker image is extremely lightweight as it has no host OS (it uses the host OS) it can be deployed and started with very minimal delay. 
+
+## Configuration
+
+
+## Image Management and Creation
+
+
+## Image Linking
+
+
+## Scripting Docker with Ansible
+
+
+## Use Case
+
+
+## Benefits
+
+
+## Conclusion
+
+
+
+
 

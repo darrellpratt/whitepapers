@@ -28,37 +28,305 @@
         </ul>
       </header>
       <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="building-modern-web-applications" class="anchor" href="#building-modern-web-applications"><span class="octicon octicon-link"></span></a>"Building" Modern Web Applications</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<blockquote>
+<p>Darrell Pratt, Architect Leader, GBS</p>
+</blockquote>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h2>
+<a name="executive-summary" class="anchor" href="#executive-summary"><span class="octicon octicon-link"></span></a>Executive Summary</h2>
+
+<p>With the increase in popularity of one page web applications, the javascript lying underneath these applications has grown more advanced. The number of libraries that are used with these applications and the manner that they can be packaged and deployed has advanced a great deal in the last year. This paper will detail some of the more popular build chains that are used throughout the JavaScript developer community and give details as to how these tools can increase developer productivity and deliver more reliable applications.</p>
+
+<h2>
+<a name="problem-statement" class="anchor" href="#problem-statement"><span class="octicon octicon-link"></span></a>Problem Statement</h2>
+
+<p>Modern web applications include a wide variety of assets which must be packaged in various ways in order to deliver a good experience to the end user.  From source minification, dynamic module loaders, SASS and LESS compilers, CoffeeScript transpilation and dependency management the build process and application lifecycle management has become increasingly complex.</p>
+
+<h2>
+<a name="dependency-management" class="anchor" href="#dependency-management"><span class="octicon octicon-link"></span></a>Dependency Management</h2>
+
+<h3>
+<a name="bower" class="anchor" href="#bower"><span class="octicon octicon-link"></span></a>Bower</h3>
+
+<p>A few tools exist now that provide a solution for dependency management in a way similar to Maven in Java. The primary tool in this space is Bower. Bower is used by many other build frameworks such as Twitter's bootstrap and Google's Yeoman.  Bower uses a simple a manifest file to specify a set of libraries and their versions which are required by the application.  Bower uses GitHub to house the libraries not unlike Maven with its central repository.</p>
+
+<p>Bower uses a file named bower.json in the root directory of the project to specify the dependencies.  This file has a simple format shown below.</p>
+
+<h4>
+<a name="configuration-sample" class="anchor" href="#configuration-sample"><span class="octicon octicon-link"></span></a>Configuration Sample</h4>
+
+<pre><code>{
+  "name": "client",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "1.2.6",
+    "json3": "~3.2.6",
+    "es5-shim": "~2.1.0",
+    "jquery": "~1.10.2",
+    "sass-bootstrap": "~3.0.2",
+    "angular-resource": "1.2.6",
+    "angular-cookies": "1.2.6",
+    "angular-sanitize": "1.2.6",
+    "angular-route": "1.2.6",
+    "underscore": "1.6"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.6",
+    "angular-scenario": "1.2.6"
+  }
+}
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>The above configuration list information about the application in the first object block.  This can be used for documentation purposes and build information if wanted. The dependencies section list the libraries by name and version that are needed for the application to function at runtime in the browser.  The devDependencies section list libraries which are used during testing of the application.</p>
+
+<p>With this configuration file, the developer has a central location that manages the dependencies of the project and this file itself can be managed under any version control system.</p>
+
+<h4>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h4>
+
+<p>Installation of bower depends upon Node Package Manager (npm).  It would be beyond the scope of this paper to cover the installation of node and npm, but my other whitepaper on nodejs does cover this subject.</p>
+
+<pre><code>npm install -g bower
+</code></pre>
+
+<p>All dependencies required by bower are installed by npm and the -g flag will make the command available to all users.</p>
+
+<h4>
+<a name="general-usage" class="anchor" href="#general-usage"><span class="octicon octicon-link"></span></a>General Usage</h4>
+
+<p>Bower installs via npm (Node Package module) and provides a command line tool which gives the user a set of useful operations. </p>
+
+<p>-<strong>bower install</strong> - <em>will install any packages listed in the bower.json file</em>
+-<strong>bower init</strong> - <em>will create a new scaffolded bower.json file for a project</em>
+-<strong>bower search</strong> - <em>will look for a named package in the public repository</em>
+-<strong>bower update</strong> - <em>will update any packages installed locally to the lastest versions</em></p>
+
+<p><img src="https://raw.githubusercontent.com/darrellpratt/b2at/master/client/app/images/bowerHelp.png" alt="Bower Command Line Options"></p>
+
+<h2>
+<a name="build-systems" class="anchor" href="#build-systems"><span class="octicon octicon-link"></span></a>Build Systems</h2>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="gruntjs" class="anchor" href="#gruntjs"><span class="octicon octicon-link"></span></a>Grunt.js</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Grunt.js is described as a task runner that can automate common build tasks.  Many plugins are available and the community is quite large.  Plugins range from minification, jshinting, test runners, css compilers to custom plugins which can deploy to cloud providers.</p>
+
+<h4>
+<a name="installation-1" class="anchor" href="#installation-1"><span class="octicon octicon-link"></span></a>Installation</h4>
+
+<pre><code>npm install -g grunt-cli
+</code></pre>
+
+<p>This command will install of the necessary dependencies and will include the grunt command line tool for all users.</p>
+
+<h4>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h4>
+
+<p>Grunt relies on a javascript based configuration file (Gruntfile.js) to run a set of tasks. Generally tasks all take the same form and are strung together much like Ant or Gradle commands.  A configuration file is shown below.</p>
+
+<pre><code>module.exports = function(grunt) {
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    concat: {
+      options: {
+        separator: ';'
+      },
+      dist: {
+        src: ['src/**/*.js'],
+        dest: 'dist/&lt;%= pkg.name %&gt;.js'
+      }
+    },
+    uglify: {
+      options: {
+        banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("dd-mm-yyyy") %&gt; */\n'
+      },
+      dist: {
+        files: {
+          'dist/&lt;%= pkg.name %&gt;.min.js': ['&lt;%= concat.dist.dest %&gt;']
+        }
+      }
+    },
+    qunit: {
+      files: ['test/**/*.html']
+    },
+    jshint: {
+      files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+      options: {
+        // options here to override JSHint defaults
+        globals: {
+          jQuery: true,
+          console: true,
+          module: true,
+          document: true
+        }
+      }
+    },
+    watch: {
+      files: ['&lt;%= jshint.files %&gt;'],
+      tasks: ['jshint', 'qunit']
+    }
+  });
+
+
+  grunt.registerTask('test', ['jshint', 'qunit']);
+
+  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
+
+};
+</code></pre>
+
+<h4>
+<a name="command-line-view" class="anchor" href="#command-line-view"><span class="octicon octicon-link"></span></a>Command Line View</h4>
+
+<p>The Grunt command is quite similar to Ant or Gradle in that it primarly represents whatever tasks are present in the configuration file.  Running the command with no option will run the default tasks while running the command with a task name will run only that comand its predecessors.</p>
+
+<p><img src="https://raw.githubusercontent.com/darrellpratt/b2at/master/client/app/images/grunt.png" alt="Grunt Command"></p>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="gulpjs" class="anchor" href="#gulpjs"><span class="octicon octicon-link"></span></a>Gulp.js</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Gulp.js is a similar build system to Grunt.  It is much newer and it has really one major difference with Grunt. Gulp.js makes use of Nodejs streams for it's entire system of builds. Rather than using tasks as units of work as Grunt does, Gulp uses the stream technique to pipe one set of files through a pipeline of tasks.  This is best illustrated with a look at a gulp configuration file.</p>
+
+<h4>
+<a name="installation-2" class="anchor" href="#installation-2"><span class="octicon octicon-link"></span></a>Installation</h4>
+
+<pre><code>npm install -g gulp
+</code></pre>
+
+<p>To install gulp as a dev dependency for your application, run the following command in your project root directory.</p>
+
+<pre><code>npm install --save-dev gulp
+</code></pre>
+
+<h4>
+<a name="configuration-1" class="anchor" href="#configuration-1"><span class="octicon octicon-link"></span></a>Configuration</h4>
+
+<pre><code>// Load plugins
+var gulp = require('gulp'),
+    sass = require('gulp-ruby-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
+    minifycss = require('gulp-minify-css'),
+    jshint = require('gulp-jshint'),
+    uglify = require('gulp-uglify'),
+    imagemin = require('gulp-imagemin'),
+    rename = require('gulp-rename'),
+    clean = require('gulp-clean'),
+    concat = require('gulp-concat'),
+    notify = require('gulp-notify'),
+    cache = require('gulp-cache'),
+    livereload = require('gulp-livereload');
+
+// Styles
+gulp.task('styles', function() {
+  return gulp.src('src/styles/main.scss')
+    .pipe(sass({ style: 'expanded', }))
+    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(gulp.dest('dist/styles'))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(minifycss())
+    .pipe(gulp.dest('dist/styles'))
+    .pipe(notify({ message: 'Styles task complete' }));
+});
+
+// Scripts
+gulp.task('scripts', function() {
+  return gulp.src('src/scripts/**/*.js')
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('default'))
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest('dist/scripts'))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/scripts'))
+    .pipe(notify({ message: 'Scripts task complete' }));
+});
+
+// Clean
+gulp.task('clean', function() {
+  return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false})
+    .pipe(clean());
+});
+
+// Default task
+gulp.task('default', ['clean'], function() {
+    gulp.start('styles', 'scripts', 'images');
+});
+
+// Watch
+gulp.task('watch', function() {
+
+  // Watch .scss files
+  gulp.watch('src/styles/**/*.scss', ['styles']);
+
+  // Watch .js files
+  gulp.watch('src/scripts/**/*.js', ['scripts']);
+
+  // Watch image files
+  gulp.watch('src/images/**/*', ['images']);
+
+  // Create LiveReload server
+  var server = livereload();
+
+  // Watch any files in dist/, reload on change
+  gulp.watch(['dist/**']).on('change', function(file) {
+    server.changed(file.path);
+  });
+
+});
+
+</code></pre>
+
+<p>Based upon the different file sytaxes the reader can determine which system they might prefer. There is considerable weight behind the Gulp.js system currently with its use of streams and the overall direction of the direction of nodejs with its emphasis on streams as well.</p>
+
+<h2>
+<a name="scaffolding-systems" class="anchor" href="#scaffolding-systems"><span class="octicon octicon-link"></span></a>Scaffolding Systems</h2>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="yeoman" class="anchor" href="#yeoman"><span class="octicon octicon-link"></span></a>Yeoman</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>Yeoman is a tool that is built to automate front-end web workflows.  It includes tools which we have already covered (Grunt and Bower) but adds a new tool called Yo. The focus of Yeoman is to scaffold out an application based upon inputs to its build system.  This is not unlike the methodology in Ruby On Rails applications.</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<p>Yeoman includes several generators written by both the core team and community members.  There is a well documented API provided to create new generators as well.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>The framework makes use of these generators to scaffold an application structure for the user.  By selecting a few options, a user can create a well documented and well structured front-end web application.  Some of the most popular generators are included for AngularJS, Backbone, Polymer, Ember and test suites such as Karma and Jasmine.</p>
+
+<h4>
+<a name="installation-3" class="anchor" href="#installation-3"><span class="octicon octicon-link"></span></a>Installation</h4>
+
+<pre><code>npm install -g yo
+</code></pre>
+
+<p>To install any given Yeoman generator run the following command.</p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// basic web app generator</span>
+<span class="nx">npm</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">generator</span><span class="o">-</span><span class="nx">webapp</span>
+<span class="c1">// angular generator</span>
+<span class="nx">npm</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">generator</span><span class="o">-</span><span class="nx">angular</span>
+</pre></div>
+
+<h4>
+<a name="typical-usage" class="anchor" href="#typical-usage"><span class="octicon octicon-link"></span></a>Typical Usage</h4>
+
+<p>The simplest way to use Yeoman would be to generate a scaffold for a new front-end web application.  In order to perform this action, the user would run the following commands.</p>
+
+<p><img src="https://raw.githubusercontent.com/darrellpratt/b2at/master/client/app/images/yo1.png" alt="Yeoman Generator Command"></p>
+
+<p><img src="https://raw.githubusercontent.com/darrellpratt/b2at/master/client/app/images/yo2.png" alt="Yeoman Command Continued"></p>
+
+<p>At this point, Yeoman is complete and the user only needs to run bower to install the dependencies.</p>
+
+<p><img src="https://raw.githubusercontent.com/darrellpratt/b2at/master/client/app/images/yo3.png" alt="Bower Configuration"></p>
+
+<h2>
+<a name="conclusion" class="anchor" href="#conclusion"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+
+<p>This paper has detailed a list of tools that will helpfully make the front-end web application developer more effecient in their build processes.  These tools are all fairly new, but have very active communities around them. With applications like GulpJS evolving the build tools already, this is a space that is worth watching going forward.</p>
+
+<p>I believe the Yeoman framework with its generators could also be very useful to Nielsen as engineering could create their own set of generators that are specific to their application needs.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/darrellpratt">darrellpratt</a></p>

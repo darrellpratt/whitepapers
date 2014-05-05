@@ -38,12 +38,12 @@
 <h2>
 <a name="executive-summary" class="anchor" href="#executive-summary"><span class="octicon octicon-link"></span></a>Executive Summary</h2>
 
-<p>With the increase in popularity of one page web applications, the javascript lying underneath these applications has grown more advanced. The number of libraries that are used with these applications and the manner that they can be packaged and deployed has advanced a great deal in the last year. This paper will detail some of the more popular build chains that are used throughout the JavaScript developer community and give details as to how these tools can increase developer productivity and deliver more reliable applications.</p>
+<p>With the increase in popularity of one page web applications, the JavaScript lying underneath these applications has grown more advanced. The number of libraries that are used with these applications and the manner that they can be packaged and deployed has advanced a great deal in the last year. This paper will detail some of the more popular build chains that are used throughout the JavaScript developer community and give details as to how these tools can increase developer productivity and deliver more reliable applications.</p>
 
 <h2>
 <a name="problem-statement" class="anchor" href="#problem-statement"><span class="octicon octicon-link"></span></a>Problem Statement</h2>
 
-<p>Modern web applications include a wide variety of assets which must be packaged in various ways in order to deliver a good experience to the end user.  From source minification, dynamic module loaders, SASS and LESS compilers, CoffeeScript transpilation and dependency management the build process and application lifecycle management has become increasingly complex.</p>
+<p>Modern web applications include a wide variety of assets which must be packaged in various ways in order to deliver a good experience to the end user.  From source minification, dynamic module loaders, SASS and LESS compilers, CoffeeScript transpilation and dependency management, the build process and application lifecycle management has become increasingly complex.</p>
 
 <h2>
 <a name="dependency-management" class="anchor" href="#dependency-management"><span class="octicon octicon-link"></span></a>Dependency Management</h2>
@@ -51,7 +51,7 @@
 <h3>
 <a name="bower" class="anchor" href="#bower"><span class="octicon octicon-link"></span></a>Bower</h3>
 
-<p>A few tools exist now that provide a solution for dependency management in a way similar to Maven in Java. The primary tool in this space is Bower. Bower is used by many other build frameworks such as Twitter's bootstrap and Google's Yeoman.  Bower uses a simple a manifest file to specify a set of libraries and their versions which are required by the application.  Bower uses GitHub to house the libraries not unlike Maven with its central repository.</p>
+<p>A few tools exist now that provide a solution for dependency management in a way similar to Maven in Java. The primary tool in this space is Bower. Bower is used by many other build frameworks such as Twitter's bootstrap and Google's Yeoman.  Bower uses a simple manifest file to specify a set of libraries and their versions which are required by the application.  Bower uses GitHub to house the libraries not unlike Maven with its central repository.</p>
 
 <p>Bower uses a file named bower.json in the root directory of the project to specify the dependencies.  This file has a simple format shown below.</p>
 
@@ -80,7 +80,7 @@
 }
 </code></pre>
 
-<p>The above configuration list information about the application in the first object block.  This can be used for documentation purposes and build information if wanted. The dependencies section list the libraries by name and version that are needed for the application to function at runtime in the browser.  The devDependencies section list libraries which are used during testing of the application.</p>
+<p>The above configuration lists information about the application in the first object block.  This can be used for documentation purposes and build information if wanted. The dependencies section list the libraries by name and version that are needed for the application to function at runtime in the browser.  The devDependencies section list libraries which are used during testing of the application.</p>
 
 <p>With this configuration file, the developer has a central location that manages the dependencies of the project and this file itself can be managed under any version control system.</p>
 
@@ -99,12 +99,20 @@
 
 <p>Bower installs via npm (Node Package module) and provides a command line tool which gives the user a set of useful operations. </p>
 
-<p>-<strong>bower install</strong> - <em>will install any packages listed in the bower.json file</em>
--<strong>bower init</strong> - <em>will create a new scaffolded bower.json file for a project</em>
--<strong>bower search</strong> - <em>will look for a named package in the public repository</em>
--<strong>bower update</strong> - <em>will update any packages installed locally to the lastest versions</em></p>
-
-<p><img src="https://raw.githubusercontent.com/darrellpratt/b2at/master/client/app/images/bowerHelp.png" alt="Bower Command Line Options"></p>
+<ul>
+<li>
+<strong>bower install</strong> - <em>will install any packages listed in the bower.json file</em>
+</li>
+<li>
+<strong>bower init</strong> - <em>will create a new scaffolded bower.json file for a project</em>
+</li>
+<li>
+<strong>bower search</strong> - <em>will look for a named package in the public repository</em>
+</li>
+<li>
+<strong>bower update</strong> - <em>will update any packages installed locally to the lastest versions</em>
+</li>
+</ul><p><img src="https://raw.githubusercontent.com/darrellpratt/b2at/master/client/app/images/bowerHelp.png" alt="Bower Command Line Options"></p>
 
 <h2>
 <a name="build-systems" class="anchor" href="#build-systems"><span class="octicon octicon-link"></span></a>Build Systems</h2>
@@ -125,7 +133,7 @@
 <h4>
 <a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h4>
 
-<p>Grunt relies on a javascript based configuration file (Gruntfile.js) to run a set of tasks. Generally tasks all take the same form and are strung together much like Ant or Gradle commands.  A configuration file is shown below.</p>
+<p>Grunt relies on a JavaScript based configuration file (Gruntfile.js) to run a set of tasks. Generally tasks all take the same form and are strung together much like Ant or Gradle commands.  A configuration file is shown below.</p>
 
 <pre><code>module.exports = function(grunt) {
 
@@ -182,14 +190,14 @@
 <h4>
 <a name="command-line-view" class="anchor" href="#command-line-view"><span class="octicon octicon-link"></span></a>Command Line View</h4>
 
-<p>The Grunt command is quite similar to Ant or Gradle in that it primarly represents whatever tasks are present in the configuration file.  Running the command with no option will run the default tasks while running the command with a task name will run only that comand its predecessors.</p>
+<p>The Grunt command is quite similar to Ant or Gradle in that it primarly represents whatever tasks are present in the configuration file.  Running the command with no option will run the default task; however, running the command with a task name will run only that command and its predecessors.</p>
 
 <p><img src="https://raw.githubusercontent.com/darrellpratt/b2at/master/client/app/images/grunt.png" alt="Grunt Command"></p>
 
 <h3>
 <a name="gulpjs" class="anchor" href="#gulpjs"><span class="octicon octicon-link"></span></a>Gulp.js</h3>
 
-<p>Gulp.js is a similar build system to Grunt.  It is much newer and it has really one major difference with Grunt. Gulp.js makes use of Nodejs streams for it's entire system of builds. Rather than using tasks as units of work as Grunt does, Gulp uses the stream technique to pipe one set of files through a pipeline of tasks.  This is best illustrated with a look at a gulp configuration file.</p>
+<p>Gulp.js is a similar build system to Grunt.  It is a newer framework and it has one major difference with Grunt. Gulp.js makes use of Nodejs streams for its entire build system. Rather than using tasks as units of work as Grunt does, Gulp uses the stream technique to pipe one set of files through a pipeline of tasks.  This is best illustrated with a look at a gulp configuration file.</p>
 
 <h4>
 <a name="installation-2" class="anchor" href="#installation-2"><span class="octicon octicon-link"></span></a>Installation</h4>
@@ -224,7 +232,7 @@ var gulp = require('gulp'),
 gulp.task('styles', function() {
   return gulp.src('src/styles/main.scss')
     .pipe(sass({ style: 'expanded', }))
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(autoprefixer('last 2 version', ''))
     .pipe(gulp.dest('dist/styles'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(minifycss())
@@ -290,7 +298,7 @@ gulp.task('watch', function() {
 
 <p>Yeoman is a tool that is built to automate front-end web workflows.  It includes tools which we have already covered (Grunt and Bower) but adds a new tool called Yo. The focus of Yeoman is to scaffold out an application based upon inputs to its build system.  This is not unlike the methodology in Ruby On Rails applications.</p>
 
-<p>Yeoman includes several generators written by both the core team and community members.  There is a well documented API provided to create new generators as well.</p>
+<p>Yeoman includes several generators written by both the core team and community members and there is a well documented API provided to create new generators.</p>
 
 <p>The framework makes use of these generators to scaffold an application structure for the user.  By selecting a few options, a user can create a well documented and well structured front-end web application.  Some of the most popular generators are included for AngularJS, Backbone, Polymer, Ember and test suites such as Karma and Jasmine.</p>
 
@@ -324,7 +332,7 @@ gulp.task('watch', function() {
 <h2>
 <a name="conclusion" class="anchor" href="#conclusion"><span class="octicon octicon-link"></span></a>Conclusion</h2>
 
-<p>This paper has detailed a list of tools that will helpfully make the front-end web application developer more effecient in their build processes.  These tools are all fairly new, but have very active communities around them. With applications like GulpJS evolving the build tools already, this is a space that is worth watching going forward.</p>
+<p>This paper has detailed a list of tools that will make the front-end web application developer more effecient in their build processes.  These tools are all fairly new, but have very active communities around them and with applications like GulpJS evolving the build tools, this is a space that is worth exploring going forward.</p>
 
 <p>I believe the Yeoman framework with its generators could also be very useful to Nielsen as engineering could create their own set of generators that are specific to their application needs.</p>
       </section>

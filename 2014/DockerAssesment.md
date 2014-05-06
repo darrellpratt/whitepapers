@@ -177,8 +177,7 @@ If you have made it this far, note that most examples will start to look repetit
 
 Once docker is installed you can test the installation by running the simplest container possible.  The following command will run a base ubuntu container and give you an interactive shell to run commands from.  Note the load time of the container upon the first run and then exit the container and run it again and note the difference.  This is the effect of image caching and this will begin to demonstrate the speed of docker.
 
-```
-
+![docker run command][dockerRun]
 
 
 ## Image Linking
@@ -203,4 +202,5 @@ Once docker is installed you can test the installation by running the simplest c
 [wikiDepHellLink]: http://en.wikipedia.org/wiki/Dependency_hell
 [lxcLink]: https://linuxcontainers.org
 [dockerCmd]: https://raw.githubusercontent.com/darrellpratt/whitepapers/master/2014/images/dockercommand.png
+[dockerRun]: https://raw.githubusercontent.com/darrellpratt/whitepapers/master/2014/images/dockerRun.png
 

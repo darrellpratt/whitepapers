@@ -1,4 +1,4 @@
-# An assesment of the Docker micro container
+# An assessment of the Docker micro container
 
 > Darrell Pratt, Architect Leader, GBS
 
@@ -177,7 +177,7 @@ If you have made it this far, note that most examples will start to look repetit
 
 Once docker is installed you can test the installation by running the simplest container possible.  The following command will run a base ubuntu container and give you an interactive shell to run commands from.  Note the load time of the container upon the first run and then exit the container and run it again and note the difference.  This is the effect of image caching and this will begin to demonstrate the speed of docker.
 
-![docker run command][dockerRun]
+![docker run commander][dockerRun]
 
 
 ## Image Linking

@@ -160,10 +160,25 @@ ENTRYPOINT	<cmd> <args>
 
 A possible example would be to use an **ENTRYPOINT** instruction to create a container that would run a data import process. This would allow any number of these containers to be activated when needed and to be torn down and cleansed from the system when not in use.
 
-
+Now that we have written a dockerfile to configure an image, we need to actually build that image to use it.  The next section will detail the docker commands and give some guidance on how to setup an environment to work with docker effectively.
 
 
 ## Image Management and Creation
+
+The docker client and daemon process are easy to install on a number of operating systems. The following set of commands will install docker on an unbuntu or ubuntu like system.
+
+```
+$ sudo apt-get update
+$ sudo apt-get install docker.io
+$ sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
+```
+
+If you have made it this far, note that most examples will start to look repetitive with the use of _sudo_.  Docker does need to be run as root or in a privelaged group, but if a docker group exists on the host OS (which it should if it is installed properly) then if the user (you in this case) is a member of the docker group then sudo is not required. This is highly recommeded for learning docker, but in production one would probably want to run with sudo to preserve security.
+
+Once docker is installed you can test the installation by running the simplest container possible.  The following command will run a base ubuntu container and give you an interactive shell to run commands from.  Note the load time of the container upon the first run and then exit the container and run it again and note the difference.  This is the effect of image caching and this will begin to demonstrate the speed of docker.
+
+```
+
 
 
 ## Image Linking
@@ -187,5 +202,5 @@ A possible example would be to use an **ENTRYPOINT** instruction to create a con
 [wikiBreakBulkLink]: http://en.wikipedia.org/wiki/Break_bulk_cargo
 [wikiDepHellLink]: http://en.wikipedia.org/wiki/Dependency_hell
 [lxcLink]: https://linuxcontainers.org
-[dockerCmd]: 
+[dockerCmd]: https://raw.githubusercontent.com/darrellpratt/whitepapers/master/2014/images/dockercommand.png
 

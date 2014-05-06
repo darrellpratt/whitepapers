@@ -1,4 +1,4 @@
-# An assessment of the Docker micro container
+# An Assessment of the Docker Micro Container
 
 > Darrell Pratt, Architect Leader, GBS
 

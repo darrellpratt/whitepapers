@@ -14,7 +14,7 @@ Virtualization has helped companies make the best use of their physical hardware
 
 ## Docker Background
 
-Docker was created to solve the issue of build once, run anywhere. Docker automates the creation of a self-sufficient container that can run anywhere, but displays the same outward behaviour to the developer or ops team regardless of location. A central difference between Docker and traditional virtual machines, is that the Docker image is extremely lightweight as it has no host OS (it uses the host OS) and it can be deployed and started with very minimal delay. Docker itself uses [LXC (Linux Containers)][lxcLink] which acts as a direct interface to the containments features which are part of the linux kernel.  This acts at a lower level than Xen which (a hypervisor) and much lower than the VM level such as VMWare uses.
+Docker was created to solve the issue of build once, run anywhere. Docker automates the creation of a self-sufficient container that can run anywhere, but displays the same outward behaviour to the developer or ops team regardless of location. A central difference between Docker and traditional virtual machines, is that the Docker image is extremely lightweight as it has no host OS (it uses the host OS) and it can be deployed and started with very minimal delay. Docker itself uses [LXC (Linux Containers)][lxcLink] which acts as a direct interface to the containment features which are part of the linux kernel.  This acts at a lower level than Xen which (a hypervisor) and much lower than the VM level such as VMWare uses. Docker also uses _cgroups_ which stands for control groups. Using [cgroups][cgroupLink] allows the container to control the amount of physical resources that the container can use (RAM, System Cache, CPU prioritization). In order to virtualize the storage subsystem, docker uses [UnionFS][unionfsLink]. This file system creates branches or layers of separate filesystems onto one unified base. 
 
 An illustration of the difference between a traditional container and Docker is illustrated below.
 
@@ -47,7 +47,7 @@ FROM ubuntu:13.03
 
 This would use the 13.03 release of Ubuntu as our base image.  There are several distributions one can choose from, such as centos, smartos and many others.
 
-After specifiying the base image with the **FROM** instruction the container more than likely needs to be customized with your preferred libraries and binaries needed to run your application. The **RUN** instruction is used here to run any arbitrary command on the new image.  
+After specifiying the base image with the **FROM** instruction the container more than likely needs to be customized with your preferred libraries and binaries needed to run your application. The **RUN** instruction is used here to run any arbitrary command on the new image.
 
 ```
 # Start with a base Ubuntu image
@@ -179,6 +179,57 @@ Once docker is installed you can test the installation by running the simplest c
 
 ![docker run commander][dockerRun]
 
+In the above example we use the docker client to run a base image in interactive mode using the bash shell. Once this container has run and used then it is cached for faster startup on subsequent invocations.
+
+### The Docker Client
+
+The docker client is run through the docker cli. This command acts as a client to the dockerd process which has the responsiblity of controlling the actual container
+
+```
+docker
+Usage: docker [OPTIONS] COMMAND [arg...]
+ -H=[unix:///var/run/docker.sock]: tcp://host:port to bind/connect to or unix://path/to/socket to use
+
+A self-sufficient runtime for linux containers.
+
+Commands:
+    attach    Attach to a running container
+    build     Build a container from a Dockerfile
+    commit    Create a new image from a containers changes
+    cp        Copy files/folders from the containers filesystem to the host path
+    diff      Inspect changes on a container's filesystem
+    events    Get real time events from the server
+    export    Stream the contents of a container as a tar archive
+    history   Show the history of an image
+    images    List images
+    import    Create a new filesystem image from the contents of a tarball
+    info      Display system-wide information
+    inspect   Return low-level information on a container
+    kill      Kill a running container
+    load      Load an image from a tar archive
+    login     Register or Login to the docker registry server
+    logs      Fetch the logs of a container
+    port      Lookup the public-facing port which is NAT-ed to PRIVATE_PORT
+    ps        List containers
+    pull      Pull an image or a repository from the docker registry server
+    push      Push an image or a repository to the docker registry server
+    restart   Restart a running container
+    rm        Remove one or more containers
+    rmi       Remove one or more images
+    run       Run a command in a new container
+    save      Save an image to a tar archive
+    search    Search for an image in the docker index
+    start     Start a stopped container
+    stop      Stop a running container
+    tag       Tag an image into a repository
+    top       Lookup the running processes of a container
+    version   Show the docker version information
+    wait      Block until a container stops, then print its exit code
+
+```
+
+
+
 
 ## Image Linking
 
@@ -196,11 +247,13 @@ Once docker is installed you can test the installation by running the simplest c
 
 
 
-
+[cgroupLink]: http://en.wikipedia.org/wiki/Cgroups
+[unionfsLink]: http://en.wikipedia.org/wiki/UnionFS
 [dockervm1]: https://raw.githubusercontent.com/darrellpratt/whitepapers/master/2014/images/docker_vm.jpg
 [wikiBreakBulkLink]: http://en.wikipedia.org/wiki/Break_bulk_cargo
 [wikiDepHellLink]: http://en.wikipedia.org/wiki/Dependency_hell
 [lxcLink]: https://linuxcontainers.org
 [dockerCmd]: https://raw.githubusercontent.com/darrellpratt/whitepapers/master/2014/images/dockercommand.png
 [dockerRun]: https://raw.githubusercontent.com/darrellpratt/whitepapers/master/2014/images/dockerRun.png
+
 

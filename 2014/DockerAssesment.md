@@ -14,7 +14,7 @@ Virtualization has helped companies make the best use of their physical hardware
 
 ## Docker Background
 
-Docker was created to solve the issue of build once, run anywhere. Docker automates the creation of a self-sufficient container that can run anywhere, but displays the same outward behaviour to the developer or ops team regardless of location. A central difference between Docker and traditional virtual machines, is that the Docker image is extremely lightweight as it has no host OS (it uses the host OS) and it can be deployed and started with very minimal delay. Docker itself uses [LXC (Linux Containers)][lxcLink] which acts as a direct interface to the containment features which are part of the linux kernel.  This acts at a lower level than Xen which (a hypervisor) and much lower than the VM level such as VMWare uses. Docker also uses _cgroups_ which stands for control groups. Using [cgroups][cgroupLink] allows the container to control the amount of physical resources that the container can use (RAM, System Cache, CPU prioritization). In order to virtualize the storage subsystem, docker uses [UnionFS][unionfsLink]. This file system creates branches or layers of separate filesystems onto one unified base. 
+Docker was created to solve the issue of build once, run anywhere. Docker automates the creation of a self-sufficient container that can run anywhere, but displays the same outward behaviour to the developer or ops team regardless of location. A central difference between Docker and traditional virtual machines, is that the Docker image is extremely lightweight as it has no host OS (it uses the host OS) and it can be deployed and started with very minimal delay. Docker itself uses [LXC (Linux Containers)][lxcLink] which acts as a direct interface to the containment features which are part of the linux kernel.  This acts at a lower level than Xen which (a hypervisor) and much lower than the VM level such as VMWare uses. Docker also uses _cgroups_ which stands for control groups. Using [cgroups][cgroupLink] allows the container to control the amount of physical resources that the container can use (RAM, System Cache, CPU prioritization). In order to virtualize the storage subsystem, docker uses [UnionFS][unionfsLink]. This file system at the simplest definition 
 
 An illustration of the difference between a traditional container and Docker is illustrated below.
 
@@ -183,7 +183,7 @@ In the above example we use the docker client to run a base image in interactive
 
 ### The Docker Client
 
-The docker client is run through the docker cli. This command acts as a client to the dockerd process which has the responsiblity of controlling the actual container
+The docker client is run through the docker cli. This command acts as a client to the dockerd process which has the responsiblity of controlling the actual container.  Below are the list of command options for the docker cli.
 
 ```
 docker
@@ -227,7 +227,7 @@ Commands:
     wait      Block until a container stops, then print its exit code
 
 ```
-
+### 
 
 
 

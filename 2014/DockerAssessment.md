@@ -288,17 +288,50 @@ Run a command in a new container
   --link=[]: Add link to another container (name:alias)
   -m, --memory="": Memory limit (format: <number><optional unit>, where unit = b, k, m or g)
   --name="": Assign a name to the container
-  -p, --publish=[]: Publish a container's port to the host (format: ip:hostPort:containerPort | ip::containerPort | hostPort:containerPort) (use 'docker port' to see the actual mapping)
+  -p, --publish=[]: Publish a container's port to the host
+		 (format: ip:hostPort:containerPort | 
+				ip::containerPort | hostPort:containerPort) 
+				(use 'docker port' to see the actual mapping)
   -P, --publish-all=false: Publish all exposed ports to the host interfaces
   --privileged=false: Give extended privileges to this container
   --rm=false: Automatically remove the container when it exits (incompatible with -d)
   -u, --user="": Username or UID
-  -v, --volume=[]: Bind mount a volume (e.g. from the host: -v /host:/container, from docker: -v /container)
+  -v, --volume=[]: Bind mount a volume (e.g. from the host: 
+			-v /host:/container, from docker: -v /container)
   --volumes-from=[]: Mount volumes from the specified container(s)
   -w, --workdir="": Working directory inside the container
 
 ```
- The command has a few more options revolvind around LXC and DNS but those are best read in the documentation. I haven't had a need yet to use those options, so for one to experiment with Docker it's probably not necessary.
+
+The command has a few more options revolving around LXC and DNS but those are best read in the documentation. I haven't had a need yet to use those options, so for one to experiment with Docker it's probably not necessary.
+
+Using our image from before, we can run the following command to run our container based on this image.
+
+```
+docker run -p 49160:3000 -d dpratt/ubuntu-nodejs
+```
+
+With this command we are instantiating our container _**dpratt/ubuntu-nodejs**_ and the **-p** option is telling the docker daemon to expose the container port 3000 to the host port 49160.  This port mapping creates the network bridge from the host to the container so we can access the container service on port 49160 after it is running. The dockerfile configuration from earlier exposed the port 3000 from the container, so the **-p** option here just maps that exposed port to a host port of our choosing. The **-d** options instructs docker to run the container as a detached container.  This means that we basically want to run the container in the background.  This would be similar to running a command as _**nohup somescript.sh &**_ in unix.
+
+#### Verification of Container State
+If the container was started with the **-d** option, then the shell will not show the logs as outputed by the command that is being run by the container.  This is not an issue as docker provides a few methods to handle this.
+
+The commands that are used to inspect a running container use the containers id that is generated when the container is started.  The simplest way of doing this is to capture the ID upon running the command. The following works to make the container id more referenceable for future commands.
+
+```
+CONTAINER_ID=`docker run -d -p 49160:3000 dpratt/ubuntu-nodejs`
+```
+
+This will capture our container id in the environmental variable for use in later commands.  If you do not capture the id, then you can run the docker ps command to list the id's of each active container. The ID can be groked from this output and used later.
+
+Running the _docker ps_ command now should give us the following output.
+
+```
+$ docker ps
+CONTAINER ID        IMAGE                       COMMAND                CREATED             STATUS              PORTS                     NAMES
+1cf68b9bdb50        dpratt/ubuntu-nodejs:latest   node /src/server/ser   8 minutes ago       Up 8 minutes        0.0.0.0:49160->3000/tcp   trusting_archimedes   
+```
+
 
 
 ## Image Linking

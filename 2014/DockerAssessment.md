@@ -314,7 +314,7 @@ docker run -p 49160:3000 -d dpratt/ubuntu-nodejs
 With this command we are instantiating our container _**dpratt/ubuntu-nodejs**_ and the **-p** option is telling the docker daemon to expose the container port 3000 to the host port 49160.  This port mapping creates the network bridge from the host to the container so we can access the container service on port 49160 after it is running. The dockerfile configuration from earlier exposed the port 3000 from the container, so the **-p** option here just maps that exposed port to a host port of our choosing. The **-d** options instructs docker to run the container as a detached container.  This means that we basically want to run the container in the background.  This would be similar to running a command as _**nohup somescript.sh &**_ in unix.
 
 #### Verification of Container State
-If the container was started with the **-d** option, then the shell will not show the logs as outputed by the command that is being run by the container.  This is not an issue as docker provides a few methods to handle this.
+If the container was started with the **-d** (detached) option, then the shell will not show the logs as outputed by the command that is being run by the container.  This is not an issue as docker provides a few methods to handle this.
 
 The commands that are used to inspect a running container use the containers id that is generated when the container is started.  The simplest way of doing this is to capture the ID upon running the command. The following works to make the container id more referenceable for future commands.
 
@@ -329,12 +329,14 @@ Running the _docker ps_ command now should give us the following output.
 ```
 $ docker ps
 CONTAINER ID        IMAGE                       COMMAND                CREATED             STATUS              PORTS                     NAMES
-1cf68b9bdb50        dpratt/ubuntu-nodejs:latest   node /src/server/ser   8 minutes ago       Up 8 minutes        0.0.0.0:49160->3000/tcp   trusting_archimedes   
+1cf68b9bdb50        dpratt/ubuntu-nodejs:latest   node /src/server/ser   8 minutes ago       Up 8 minutes        0.0.0.0:49160->3000/tcp   trusting_archimedes
 ```
 
+The output from the docker ps command shows the container id which can be used to attach to the running container or otherwise control its lifecycle.  It is important to notice that the name is not null here.  We did not specify a _--name_ option on the run command so docker has generated a random name for the container.  When we look at linking containers next, this name becomes more important.
 
+## Container Linking
 
-## Image Linking
+One core of idea of docker is that each container is really only running one process.  If you were to build out a typical web application, you might want to create a containers to hold nginx, redis, nodejs, couchbase etc. With these containers created at the process level, the issue becomes visibility between containers at run time. Fortunately, docker solves this problem easily with the concept of container naming and linking. As we detailed above, the _--name_ option 
 
 
 ## Scripting Docker with Ansible

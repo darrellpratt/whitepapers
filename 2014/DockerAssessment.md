@@ -336,20 +336,21 @@ The output from the docker ps command shows the container id which can be used t
 
 ## Container Linking
 
-One core of idea of docker is that each container is really only running one process.  If you were to build out a typical web application, you might want to create a containers to hold nginx, redis, nodejs, couchbase etc. With these containers created at the process level, the issue becomes visibility between containers at run time. Fortunately, docker solves this problem easily with the concept of container naming and linking. As we detailed above, the _--name_ option 
+One core of idea of docker is that each container is really only running one process.  If you were to build out a typical web application, you might want to create a containers to hold nginx, redis, nodejs, couchbase etc. With these containers created at the process level, the issue becomes visibility between containers at run time. Fortunately, docker solves this problem easily with the concept of container naming and linking. As we detailed above, the _--name_ option gives the newly created container a referenceable name.  This name can be used for any of the docker commands but more importantly the name gives a container a method to interact with another running container. Linking containers is accomplished with the _--link=[]_ command option. The option can take a list of _name:alias_ pairs.
 
 
-## Scripting Docker with Ansible
+```
+sudo docker run -t -i --link redis:db --name webapp ubuntu bash
+```
 
+This command will establish a link to the redis container from this new webapp container with the alias db.  The interesting part of this is that the environmental information from the linked container is made available to the child container.  The child container now has access to the parent' environmental configuration, so the container can use this information to connect to that parent container's resources. The configuration data is prefixed with the name of the parent container, such that a variable in the above parent container named TCP_PORT would be available as DB_TCP_PORT in the child container.
 
-## Use Case
-
-
-## Benefits
+In the case of a database, the parent container could simply expose the connection information in the environment, and this could be used by the child to make the connection without being explicitly configured from the dockerfile or runtime to with this data.
 
 
 ## Conclusion
 
+This paper has covered in detail the basic usage of Docker to create micro containers and why one might want to do so. Docker is most certainly a new technology, but is based almost entirely upon technology from the underlying linux kernel which has been in existence for some time. As detailed in the paper, the benefits of the speed of building and starting containers, makes Docker a very interesting technology when compared to existing solutions such as VMWare. As applications have moved more and more toward the concept of separation of concerns within the application architecture, Docker should allow organizations to move their infrastructure toward the concept of SOC with hardware virtualization at the micro container level. 
 
 
 [cgroupLink]: http://en.wikipedia.org/wiki/Cgroups

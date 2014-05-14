@@ -5,7 +5,7 @@
 
 ## Executive Summary
 
-Virtual machines have always been a large part of any sizeable development organization and their use as a means to virtualize the resources of a physical machine are well known.  A new application called Docker is turning this concept of virtualization into immediately accessible micro containers for any organization to easily tie into their workflows. This framework has grown verey rapidly with even Amazon Web Services just recently announcing support for Docker in their Elastic Cloud service.
+Virtual machines have always been a large part of any sizeable development organization and their use as a means to virtualize the resources of a physical machine are well known.  A new application called Docker is turning this concept of virtualization into immediately accessible micro containers for any organization to easily tie into their workflows. This framework has grown very rapidly with even Amazon Web Services just recently announcing support for Docker in their Elastic Cloud service.
 
 
 ## Problem Statement

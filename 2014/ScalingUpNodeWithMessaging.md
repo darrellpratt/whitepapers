@@ -5,12 +5,12 @@
 
 ## Executive Summary
 
-Slow change within large datasets results in 
+Slow change within large datasets results in... TBD
 
 
 ## Problem Statement
 
-Modern web applications include a wide variety of assets which must be packaged in various ways in order to deliver a good experience to the end user.  From source minification, dynamic module loaders, SASS and LESS compilers, CoffeeScript transpilation and dependency management, the build process and application lifecycle management has become increasingly complex.
+TBD
 
 ## Dependency Management
 
